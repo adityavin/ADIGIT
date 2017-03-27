@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>true</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <deprecated>false</deprecated>
+    <description>The video asset itself</description>
+    <enableActivities>true</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>Deleted_In_Wistia__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>This will track if the record has been deleted in Wistia such that we don&apos;t lose the view history even if the record was deleted in Wistia.</description>
+        <externalId>false</externalId>
+        <label>Deleted In Wistia</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Do_not_Send__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>The flag controls the import of Wistia Videos that don&apos;t belong to the project selected during setup. However, view information needs to be captured for the videos.</description>
+        <externalId>false</externalId>
+        <label>Do not Send</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Page__c</fullName>
+        <deprecated>false</deprecated>
+        <description>This field holds the website value</description>
+        <externalId>false</externalId>
+        <label>Page</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Url</type>
+    </fields>
+    <fields>
+        <fullName>Priority__c</fullName>
+        <deprecated>false</deprecated>
+        <description>This is an example of a priority value set on a video to help you automate the right response at the right time based on the video viewed.</description>
+        <externalId>false</externalId>
+        <label>Priority</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>High</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Medium</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Low</fullName>
+                    <default>false</default>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Total_Percent_Viewed__c</fullName>
+        <deprecated>false</deprecated>
+        <description>For summing the total percent viewed of all views</description>
+        <externalId>false</externalId>
+        <label>Total Percent Viewed</label>
+        <summarizedField>Wistia_View__c.Percent_Viewed__c</summarizedField>
+        <summaryForeignKey>Wistia_View__c.Wistia_Video__c</summaryForeignKey>
+        <summaryOperation>sum</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Total_Views__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Total Views</label>
+        <precision>10</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Total_Wistia_Clicks__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Total Wistia Clicks</label>
+        <summarizedField>Wistia_View__c.User_Clicks__c</summarizedField>
+        <summaryForeignKey>Wistia_View__c.Wistia_Video__c</summaryForeignKey>
+        <summaryOperation>sum</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Total_Wistia_Loads__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Total Wistia Loads</label>
+        <summarizedField>Wistia_View__c.User_Loads__c</summarizedField>
+        <summaryForeignKey>Wistia_View__c.Wistia_Video__c</summaryForeignKey>
+        <summaryOperation>sum</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Total_Wistia_Plays__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Total Wistia Plays</label>
+        <summarizedField>Wistia_View__c.User_Plays__c</summarizedField>
+        <summaryForeignKey>Wistia_View__c.Wistia_Video__c</summaryForeignKey>
+        <summaryOperation>sum</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Video_Duration__c</fullName>
+        <deprecated>false</deprecated>
+        <description>This field used to store total video duration</description>
+        <externalId>false</externalId>
+        <label>Video Duration</label>
+        <precision>8</precision>
+        <required>false</required>
+        <scale>4</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Video_Thumbnail__c</fullName>
+        <deprecated>false</deprecated>
+        <description>This field holds the video thumbnail</description>
+        <externalId>false</externalId>
+        <label>Video Thumbnail</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Url</type>
+    </fields>
+    <fields>
+        <fullName>Video_Total_Duration__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Video Total Duration</label>
+        <precision>4</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Video_Url__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Thios field store wistia video url which will used to send via email</description>
+        <externalId>false</externalId>
+        <label>Video Url</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Url</type>
+    </fields>
+    <fields>
+        <fullName>Wistia_Video_Id__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <deprecated>false</deprecated>
+        <description>unique id of media received from Wistia (hashed_id)</description>
+        <externalId>true</externalId>
+        <label>Wistia Video Id</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <label>Wistia Video</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>NAME</columns>
+        <columns>Video_Duration__c</columns>
+        <columns>Video_Thumbnail__c</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>Total_Wistia_Plays__c</columns>
+        <columns>Video_Url__c</columns>
+        <columns>Wistia_Video_Id__c</columns>
+        <columns>Do_not_Send__c</columns>
+        <columns>Deleted_In_Wistia__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <nameField>
+        <label>Wistia Video Name</label>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>Wistia Videos</pluralLabel>
+    <searchLayouts>
+        <customTabListAdditionalFields>Video_Duration__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Video_Thumbnail__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Total_Wistia_Plays__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Deleted_In_Wistia__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>CREATED_DATE</customTabListAdditionalFields>
+        <searchResultsAdditionalFields>Video_Duration__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Total_Wistia_Plays__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Video_Thumbnail__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Deleted_In_Wistia__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>CREATED_DATE</searchResultsAdditionalFields>
+    </searchLayouts>
+    <sharingModel>ReadWrite</sharingModel>
+    <webLinks>
+        <fullName>View_Videos</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>View Videos</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>window.open(&apos;/apex/ViewAllHistory?id={!Wistia_Video__c.Id}&apos;);</url>
+    </webLinks>
+</CustomObject>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>Wistia Contact Video Email</name>
+    <style>none</style>
+    <subject>Wistia Video</subject>
+    <textOnly>{!Contact.Video_Email_Body__c}</textOnly>
+    <type>custom</type>
+</EmailTemplate>

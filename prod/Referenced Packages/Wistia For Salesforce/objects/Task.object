@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <webLinks>
+        <fullName>Send_Video_Email</fullName>
+        <availability>online</availability>
+        <displayType>massActionButton</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Send Video Email</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <requireRowSelection>false</requireRowSelection>
+        <url>var LeadId = &apos;{!Lead.Id}&apos;;
+var ContactId = &apos;{!Contact.Id}&apos;;
+
+if(LeadId != null &amp;&amp; LeadId != &apos;&apos;){
+    location.href=&apos;/apex/Wistia__SendVideoEmail?Id=&apos;+LeadId+&apos;&apos;;
+}
+else if(ContactId != null &amp;&amp; ContactId != &apos;&apos;){
+      location.href=&apos;/apex/Wistia__SendVideoEmail?Id=&apos;+ContactId+&apos;&apos;;
+}</url>
+    </webLinks>
+</CustomObject>

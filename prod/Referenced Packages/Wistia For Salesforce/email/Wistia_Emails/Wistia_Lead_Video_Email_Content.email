@@ -1,0 +1,27 @@
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+	<div class="wrapper">
+		<div class="matte">
+			<div class="letterhead"><img src="https://wistia-app-dev-ed--c.na31.content.force.com/servlet/servlet.ImageServer?id=01537000000TUNc&oid=00D37000000L8TY&lastMod=1441151966000"></div>
+			<div class="email-body">
+				<div class="email-header-text">
+					<p>Hi {!Lead.FirstName},</p> 
+					<p>This is {!User.FirstName}, from Wistia - the best video marketing platform in the known universe.</p>
+					<p>I would love to connect by phone soon, so I can walk you through a few different ways Wistia could be helping increase your leads, identify your most interested prospects, and connect with your existing customers.</p>
+
+					<p>To give you a peek into what Wistia can do for you, and how the product works, watch the video below.</p>
+
+					<p>Talk soon!</p>
+					<p>{!User.FirstName}</p>
+					<p>team wistia</p>
+                                       <br/>
+<br/>
+				</div>
+				<div class="email-video-embed"><span id="placeholder" style="padding:20px;border-style: dashed;border-color:#D3D3D3;color:#939393;"><span class="wistiavideoPLC">Please Select a Video from the Right</span></span><br/></div>
+
+</body>
+</html>

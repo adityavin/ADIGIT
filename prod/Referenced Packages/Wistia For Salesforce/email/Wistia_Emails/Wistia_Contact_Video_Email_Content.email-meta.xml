@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>Wistia Contact Video Email Content</name>
+    <style>none</style>
+    <subject>Wistia Video</subject>
+    <textOnly>Hi FirstName,
+
+This is OwnerFullName, from Wistia - the best video marketing platform in the known universe.
+
+I would love to connect by phone soon, so I can walk you through a few different ways Wistia could be helping increase your leads, identify your most interested prospects, and connect with your existing customers.
+
+To give you a peek into what Wistia can do for you, and how the product works, watch the video below.
+
+Talk soon!
+
+OwnerFullName
+
+team wistia
+
+
+
+&lt;span class=&quot;wistiavideoPLC&quot;&gt;Please Select a Video from the Right&lt;/span&gt;</textOnly>
+    <type>custom</type>
+</EmailTemplate>

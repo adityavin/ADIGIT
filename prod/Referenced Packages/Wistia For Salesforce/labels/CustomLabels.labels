@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
+    <labels>
+        <fullName>Body</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Body</shortDescription>
+        <value>Body</value>
+    </labels>
+    <labels>
+        <fullName>Default_video_enabled</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Default _video_enabled</shortDescription>
+        <value>Default video-enabled email template:</value>
+    </labels>
+    <labels>
+        <fullName>First_Created</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>First_Created</shortDescription>
+        <value>First Created</value>
+    </labels>
+    <labels>
+        <fullName>Intro_text</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Intro_text</shortDescription>
+        <value>Measure the true impact of your video content with Wistia for Salesforce. The integration will sync leads in real time to keep your sales team informed on how individual prospects are interacting with your videos. Segment, score and assign leads based on video view activity. Use video enabled templates to share helpful content and drive better conversations.</value>
+    </labels>
+    <labels>
+        <fullName>Last_Activity</fullName>
+        <categories>text</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Last_Activity</shortDescription>
+        <value>Last Activity</value>
+    </labels>
+    <labels>
+        <fullName>Last_Modified</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Last_Modified</shortDescription>
+        <value>Last Modified</value>
+    </labels>
+    <labels>
+        <fullName>Send_video</fullName>
+        <categories>Text</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Send video</shortDescription>
+        <value>Send video email to</value>
+    </labels>
+    <labels>
+        <fullName>Subject</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Subject</shortDescription>
+        <value>Subject</value>
+    </labels>
+    <labels>
+        <fullName>Templates</fullName>
+        <categories>Text</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Templates</shortDescription>
+        <value>Templates</value>
+    </labels>
+    <labels>
+        <fullName>This_will_lose_your_change</fullName>
+        <categories>Text</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>This will lose your change</shortDescription>
+        <value>If you change templates, any edits made to the template will be lost. Do you want to proceed?</value>
+    </labels>
+    <labels>
+        <fullName>Welcome</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Welcome</shortDescription>
+        <value>Wistia for Salesforce Configuration</value>
+    </labels>
+    <labels>
+        <fullName>Wistia_Account_Detail</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Wistia_Account_Detail</shortDescription>
+        <value>Wistia Account Details</value>
+    </labels>
+    <labels>
+        <fullName>Wistia_Refresh</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Wistia Refresh</shortDescription>
+        <value>Please click the &apos;Refresh&apos; button to see your Wistia account data on this page.</value>
+    </labels>
+    <labels>
+        <fullName>Wistia_Set_Up_Step1</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Wistia_Set_Up Step1</shortDescription>
+        <value>The first step after you have installed Wistia for Salesforce is to authorize Wistia to read and update data in your organization. Use the &quot;Connect with Wistia&quot; button to initiate the authorization process.</value>
+    </labels>
+    <labels>
+        <fullName>Wistia_Set_Up_Step4</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Wistia_Set_Up Step4</shortDescription>
+        <value>Click &quot;Start Import&quot; button to import all videos and related view data for the project you have selected in Stage 1.</value>
+    </labels>
+    <labels>
+        <fullName>Wistia_Setup_Page_Lead_Creation</fullName>
+        <categories>Setup</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Wistia Setup Page Lead Creation</shortDescription>
+        <value>If an event is received for email addresses that do not match any existing Leads or Contacts, should new Leads be created? Emails are passed through from Wistia via</value>
+    </labels>
+    <labels>
+        <fullName>Wistia_Setup_Template_Load_Error</fullName>
+        <categories>Wistia Setup</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Wistia Setup Template Load Error</shortDescription>
+        <value>The folder you have selected has too many templates to display (more than 50,000). To use a template in this folder, move or copy your template into the Wistia Video Email folder. If that does not resolve the issue, please contact Wistia support, support@wistia.com.</value>
+    </labels>
+    <labels>
+        <fullName>checking_email_exists</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>checking_email_exists</shortDescription>
+        <value>For new viewers, the system will check to see if an email exists as a Lead/Contact. We will default to the global preference of how you prefer to get to a single record to link.</value>
+    </labels>
+    <labels>
+        <fullName>default_owner</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>default_owner</shortDescription>
+        <value>The default owner or queue:</value>
+    </labels>
+    <labels>
+        <fullName>email_address</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>email_address</shortDescription>
+        <value>For multiple records with the same email address, use:</value>
+    </labels>
+    <labels>
+        <fullName>new_email_come</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>new_email_come</shortDescription>
+        <value>New identified viewers come into Salesforce through email collectors on your videos, or through email campaigns. When those viewers are converted to leads, they are assigned an owner, which can refer to a single user or to a queue.</value>
+    </labels>
+    <labels>
+        <fullName>no_history</fullName>
+        <categories>text</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>no_history</shortDescription>
+        <value>We&apos;ve searched high and low, and alas found no history.</value>
+    </labels>
+    <labels>
+        <fullName>page_loading</fullName>
+        <categories>text</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>page_loading</shortDescription>
+        <value>New Lead record, looking for history - Hey, we are in the process of finding the history for this record!  Patience..</value>
+    </labels>
+    <labels>
+        <fullName>video_enabled</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>video_enabled</shortDescription>
+        <value>The Wistia for Salesforce integration includes video-enabled templates, which have been created using merge fields. You can select a default video-enabled template here.</value>
+    </labels>
+</CustomLabels>

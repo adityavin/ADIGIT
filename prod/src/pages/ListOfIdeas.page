@@ -1,0 +1,12 @@
+<apex:page showHeader="false" sidebar="false" standardStylesheets="false"  applyBodyTag="false"
+   docType="html-5.0">
+ <html lang="en">
+<head>
+ </head>
+  <body>
+       <apex:iframe id="iframe" src="/sam/ideas/ideaList.apexp?isdtp=nv" 
+             scrolling="true" width="100%" height="1000px"/>
+
+   </body>
+</html> 
+</apex:page>

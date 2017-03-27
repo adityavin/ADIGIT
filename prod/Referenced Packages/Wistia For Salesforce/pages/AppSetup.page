@@ -1,0 +1,407 @@
+<apex:page docType="html-5.0" controller="wistia.AppSetupController" id="thePage">
+<apex:form id="theForm">
+  <apex:outputpanel id="showErrorMessage">
+       <apex:pageMessages id="msgs" />
+  </apex:outputpanel>
+  <html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <apex:inputHidden value="{!selectedTemplate }" id="hiddenTName"/>
+    <apex:actionFunction action="{!saveSettingsDb}" name="saveTheSettings" />
+    <apex:actionFunction action="{!ImportAllMedias}" name="startImport" oncomplete="window.location.reload();" />    
+    <apex:actionFunction action="{!clearSettings}" name="clearSettings" oncomplete="window.location.reload();"/>
+    <apex:actionFunction action="{!changeTemplate}" name="changeTemplate" />
+    <apex:inputHidden value="{!selectedOwner}" id="hiddenOName"/> 
+    <apex:inputHidden value="{!conditionalVar}" id="hiddenPriority"/>
+    <apex:inputHidden value="{!createNewLead}" id="hdnCreateLead"/>
+                        
+      <head>
+          <title>Wistia Setup</title>
+          <script src="{!$Resource.jQuery}" />
+
+          <apex:stylesheet value="{!URLFOR($Resource.wistia__SLDS090, 'assets/styles/salesforce-lightning-design-system-vf.css')}" />
+          <apex:stylesheet value="{!URLFOR($Resource.wistia__SLDS090, '/assets/styles/slds.css')}" />
+          <apex:includeScript value="{!URLFOR($Resource.wistia__customrtf, '/js/jquery.min.js')}"/>
+          <style>
+              #bubblePanel {
+                  height: 120px;
+              }
+              .slds-notify_container {
+                  height: 30px;
+              }
+          </style>
+          <script>
+              
+            var oAuthDialog;
+            var checkVal;
+            //$("[id$='ownerId']").val('{!JSENCODE(selectedOwner)}');
+            $(document).ready(function() {
+              document.getElementById('thePage:theForm:ownerId').value ='{!JSENCODE(selectedOwner)}';
+              //document.getElementById('thePage:theForm:HashedId').disabled = {!disableInput};
+              if({!disableInput}){
+                  $('#StartImport').removeAttr('disabled');
+                  $('#StartImport1').removeAttr('disabled');
+                  $('#saveWistia').attr('disabled','disabled');
+              }
+              else{
+                  $('#StartImport').attr('disabled','disabled');
+                  $('#StartImport1').attr('disabled','disabled');
+              }
+
+              if({!disableConnectWistiaButton}){
+                $('#connectWistia').attr('disabled','disabled');
+                $('#connectWistia1').attr('disabled','disabled'); 
+                $('#connectWistia').attr('value','Connected to Wistia'); 
+                $('#connectWistia1').attr('value','Connected to Wistia'); 
+                $('#saveWistia').removeAttr('disabled','disabled');
+                
+              }
+              else{
+                $('#connectWistia').removeAttr('disabled');
+                $('#connectWistia1').removeAttr('disabled');
+                $('#saveWistia').attr('disabled','disabled');
+
+              }
+
+              if({!disableClearSettingButton}){
+                $('#clearSetting').attr('disabled','disabled');
+                $('#clearSetting1').attr('disabled','disabled');   
+
+              }
+              else{
+                $('#clearSetting').removeAttr('disabled');
+                $('#clearSetting1').removeAttr('disabled');
+                
+              }
+
+            });
+
+            
+            function getResult() {
+              setTimeout(4000, getResult());
+            }
+
+            function startOAuth() {
+              oAuthDialog = window.open('{!JSENCODE(oAuthUrl)}', '_new', 'fullscreen=yes');
+              $('#showRefresh').show();
+            }
+            
+            function saveSettingLocal() {
+              $( "#thePage\\:theForm\\:hdnCreateLead" ).val(document.getElementById("thePage:theForm:shouldCreateLead").checked);
+              saveTheSettings();
+            }
+            
+            function startImportAllMedias() {
+              startImport();
+            }
+            
+            function startRefresh(){
+                location.reload();
+            }
+            
+            function setDOwner(name) {
+              if(name != undefined)
+                $("[id$='hiddenOName']").val(name);
+            }
+
+            function saveOwner(){
+            
+            }
+
+            function setPriority(pr) {
+              $("[id$='hiddenPriority']").val(pr);
+            }
+
+            function changeTemplateCb(selectedTemplate) {
+              $("[id$='inputSample2']").val(selectedTemplate);
+            }
+
+            $( document ).ready(function() {
+              if({!showval} == true){
+                 document.getElementById('thePage:theForm:hashedIdPanel').style.display = 'none';
+               }
+            });
+               
+          </script>
+          <style type="text/css">
+               .slds-form-element__control .radioButton{
+                    display: inline-block;
+                    border: $border-width-thin solid $color-border-input;
+                    border-radius: $border-radius-circle;
+                    background: $color-background-input;
+                    transition: border $duration-quickly linear, background-color $duration-quickly linear;
+                }
+                
+                .radioButton td{
+                    display: inline-block;
+                    position: relative;
+                    vertical-align: middle;
+                    font-style: color:#16325c;
+                    font-size: small;
+                    
+                }
+                
+                .radioButton input, .radioButton label{
+                    display: inline;
+                    vertical-align: middle;
+                    font-size: $font-size-medium;
+                }
+                #thePage:theForm:ownerId{
+                  padding-top: 3px;
+                }
+                .slds .slds-notify--alert{
+                    padding:4px;
+                    text-align:;
+                }
+                .slds-table{
+                    background-color:#f4f6f9 !important;
+                }
+                
+            </style>
+    </head>
+     
+    <body>  
+      <div class="slds">    
+        <!--<div class="slds-page-header" role="banner" Style = "padding: 24px 24px 12px;border: 1px solid #d8dde6;">-->
+        <div class="slds-card" role="banner" Style = "padding: 24px 24px 12px;border: 1px solid #d8dde6;width: 97.7%">
+          <div class="slds-grid" style="width:75%;">
+            <div class="slds-col" Style="margin-right: 4%">  
+              <div class="slds-media"> 
+                <div class="slds-media__figure">
+                  <apex:image value="{!URLFOR($Resource.wistia__WistiaLogo, 'wistia__WistiaLogo.png')}"/>
+                </div>
+                <div class="slds-media__body">
+                  <h1 class="slds-text-heading--medium"><b>{!$Label.Welcome}</b></h1>
+                </div>
+              </div>
+              <br/>
+               {!$label.Intro_text}
+            </div>
+            <div class="slds-col slds-no-flex slds-align-middle">  
+              <div class="slds-button-group" role="group">
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="myapp">    
+               
+          <!-- SECTION - BADGE COMPONENTS -->
+          <section aria-labelledby="badges">
+             
+            <div class="slds-grid slds-m-top--large">        
+              <div class="slds-col slds-col-rule--right slds-p-right--large slds-size--8-of-12">
+                <div class="slds-card">        
+                  <header class="slds-card__header slds-grid">        
+                    <div class="slds-col slds-media slds-media--center">        
+                      <div class="slds-media__figure">
+                      </div>        
+                      <div class="slds-media__body">
+                      <b>Authorize with Wistia</b>
+                    </div>       
+                  </div>
+                  <div class="slds-col slds-no-flex" style="width:215px;">
+                     <input type="button" class="slds-button slds-button--neutral" onclick="startOAuth();" value="Connect with Wistia" id="connectWistia" style=" width:175px;"/>
+                  </div>        
+                  </header>
+                    <div class="slds-card__body"  style="margin-left:2%;margin-right:4%;width: 75%;">
+                      {!$label.Wistia_Set_Up_Step1}
+                  </div>                  
+                </div>
+                
+                <div class="slds-card">        
+                    <header class="slds-card__header slds-grid">        
+                      <div class="slds-col slds-media slds-media--center">        
+                        <div class="slds-media__figure">
+                        </div>        
+                        <div class="slds-media__body">
+                        <b>{!$Label.Wistia_Account_Detail}</b>
+                      </div>       
+                    </div>
+                      
+                  </header>
+                  <div class="slds-card__body"  style="margin-left:2%;margin-right:2%;">
+                  <div class="slds-notify slds-notify--alert slds-theme--alert-texture" role="alert" id="showRefresh" 
+                      style="height: 34px;display:none;border-radius: 4px;width: 98%;">
+                      <span>{!$label.Wistia_Refresh}<input type="button" class="slds-button slds-button--neutral" value="Refresh" onclick="startRefresh();"
+                         style="float:right;line-height:24px;"/></span>
+                  </div>
+                    <table class="slds-table" style="width:30%; margin-left:-2%;">
+                        <tr>
+                          <td class="slds-text-body--small">
+                              Account Id:
+                          </td>
+                          <td class="slds-text-body--small">
+                              <b>{!wrapper.account_id}</b>
+                          </td>
+                        </tr>
+                        <tr>
+                           <td class="slds-text-body--small">
+                              Account Name:
+                          </td>
+                          <td class="slds-text-body--small">
+                            <b>{!wrapper.account_name}</b>
+                          </td>
+                        </tr>
+                        <tr >
+                          <td class="slds-text-body--small">
+                             Account URL:
+                          </td>
+                          <td class="slds-text-body--small">  
+                            <a class="slds-text-body--medium" href="{!wrapper.account_url}" target="_blank"><b>{!wrapper.account_url}</b></a>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td class="slds-text-body--small">
+                             Project:
+                          </td>
+                          <td class="slds-text-body--small">
+                            <apex:outputPanel rendered="{!wrapper.account_id != ''}" id="opPanel">
+                              <apex:actionFunction name="getNextProject" action="{!getMoreProjectList}" reRender="hashedIdPanel" />
+                              <apex:outputPanel id="hashedIdPanel">
+                                <apex:inputHidden value="{!pageNumber}" />
+                                <apex:selectList value="{!selectedHashedId}" id="HashedId" multiselect="false" size="1" onchange="getNextProject();" rendered="{!!(defaulSelectedHashId.wistia__Value__c != null)}">
+                                  <apex:selectOptions value="{!hashedIds}" id="options"/>
+                                </apex:selectList>
+                              </apex:outputPanel>
+                              <apex:outputPanel rendered="{!showval}">
+                               <b> {!selectedHashedName}</b>
+                              </apex:outputPanel>
+                            </apex:outputPanel>
+                          </td>
+                        </tr>
+                    </table>
+                  </div>
+                </div>
+
+                <div class="slds-card">        
+                  <header class="slds-card__header slds-grid">        
+                    <div class="slds-col slds-media slds-media--center">        
+                      <div class="slds-media__figure">
+                      </div>        
+                      <div class="slds-media__body">
+                       <b>Assignment Rules</b>
+                      </div>       
+                    </div>
+                    <div class="slds-col slds-no-flex" style="width:215px;">
+                     
+                    </div>        
+                  </header>
+                  <div class="slds-card__body"  style="margin-left:2%;margin-right:2%;width: 75%;">
+                    {!$Label.new_email_come}<br/><br/>
+                    <table class="slds-table" style="width:30%;margin-left: -2%;">
+                      <tr>
+                        <td class="slds-text-body--small" style="padding-top: 3%;">
+                            {!$Label.default_owner}
+                        </td>
+                        <td>
+                          <apex:inputField value="{!sampleLead.ownerId}" style="padding-top: 3px;" id="ownerId" onchange="setDOwner(this.value);"/> 
+                        </td>
+                      </tr>
+                    </table>
+                   
+                    <hr align="center"/>
+                    <div class="slds-media__body">
+                      <b>Record Management</b>
+                    </div> 
+                    <br/>
+                    {!$Label.checking_email_exists}
+                     <br/>
+                     <br/>
+                     {!$Label.email_address}    
+                     <br/>
+                     <br/>
+                   <fieldset class="slds-form-element">  
+                     <div class="slds-form-element__control">
+                      <apex:selectRadio value="{!conditionalVar}" layout="pageDirection"  styleClass="radioButton">
+                        <apex:selectOption itemValue="FirstCreated" itemlabel="{!$Label.First_Created}"/>
+                        <apex:selectOption itemValue="LastModified" itemlabel="{!$Label.Last_Modified}"/>
+                        <apex:selectOption itemValue="LastActivity" itemlabel="{!$Label.Last_Activity}"/>
+                      </apex:selectRadio>
+                     </div>
+                    </fieldset> 
+
+                    <div class="slds-form-element" style="margin-top: 2%;">
+                       <!-- 23/08/2016 Issue -->
+                        <span class="slds-form-element__label m-bottom--" style="color: #16325c;font-size: 14px;"><apex:outputLabel value="{!$Label.Wistia_Setup_Page_Lead_Creation}" /> <a href="http://wistia.com/doc/email-marketing" target="_blank">Turnstile</a> and <a href="http://wistia.com/doc/email-marketing" target="_blank">Email Merge Tags</a>.<p/>
+                        </span>
+                        <label style="margin-top:10px" class="slds-checkbox--toggle slds-grid slds-grid--vertical-align-center">
+                          <apex:inputCheckbox value="{!createNewLead}" id="shouldCreateLead"/>
+                          <!--<input type="checkbox" value="{!createNewLead}" id="shouldCreateLead" />-->
+                          <span class="slds-checkbox--faux" data-check-on="Yes" data-check-off="No"></span>
+                        </label>
+                    </div>                    
+                     <hr align="center"/>
+                     <div class="slds-media__body">
+                      <b>Default Video-Enabled Template</b>
+                    </div> 
+                    {!$Label.video_enabled}<br/><br/>
+                    <table class="slds-table" style="width:30%;margin-left: -2%;">
+                      <tr>
+                        <td  class="slds-text-body--small" style="padding-top: 3%;">
+                            {!$Label.Default_video_enabled}
+                        </td>
+                        <td>
+                            <apex:inputText id="inputSample2" styleclass="slds-input" value="{!DefaultSetting}" style="width:300px"/>
+                            <input type="button" value="Change Template" style="width:200px" class="slds-button slds-button--neutral slds-button--medium" 
+                            onclick="pageVars.changeTemplateCallback = changeTemplateCb;showmodel(true);" />
+                        </td>
+                      </tr>
+                    </table>
+                  </div>
+                </div>
+                <p />
+                <div>        
+                    <header class="slds-card__header slds-grid">        
+                      <div class="slds-col slds-media slds-media--center">        
+                        <div class="slds-media__figure">
+                        </div>        
+                        <!--<div class="slds-media__body">
+                        <b>Step 4</b> 
+                      </div>-->       
+                    </div>
+                    <apex:outputPanel rendered="{!removeStartImportButton}">
+                      <div class="slds-col slds-no-flex" style="width:215px;">
+                        <table>
+                          <td>
+                              <input type="button" class="slds-button slds-button--neutral" onclick="startImportAllMedias();" value="Start Import" id="StartImport"  style="width:175px;margin-left: -43%;"/>
+                          </td>
+                        </table>
+                      </div>    
+                    </apex:outputPanel>  
+                    <apex:outputPanel rendered="{!!removeStartImportButton}">
+                      <div class="slds-col slds-no-flex">
+                      </div>    
+                    </apex:outputPanel>
+
+                    <apex:outputPanel rendered="{!removeClearSettingsButton}">
+                      <div class="slds-col slds-no-flex" style="width:425px;">
+                        <table>
+                          <td>
+                              <input type="button" class="slds-button slds-button--neutral" onclick="clearSettings();" value="Clear Settings" id="clearSetting" style=" width:175px;"/>
+                          </td>
+                        </table>
+                      </div>    
+                    </apex:outputPanel> 
+                    <apex:outputPanel rendered="{!!removeClearSettingsButton}">
+                      <div class="slds-col slds-no-flex">
+                      </div>    
+                    </apex:outputPanel>
+
+                    <div class="slds-col slds-no-flex">
+                          <input type="button" class="slds-button slds-button--neutral" value="Save Settings" onclick="saveSettingLocal();" id="saveWistia" style="width:175px;" />
+                      </div>
+                  </header>                 
+                </div>
+        </div>
+      </div>
+    </section>
+<c:ChangeTemplate />
+</div>
+  <!-- / PRIMARY CONTENT WRAPPER -->    
+
+</div>
+      <!-- / REQUIRED SLDS WRAPPER -->
+</body>
+</html>
+
+</apex:form>
+</apex:page>

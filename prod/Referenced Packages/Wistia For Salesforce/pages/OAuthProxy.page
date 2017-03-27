@@ -1,0 +1,27 @@
+<apex:page controller="wistia.OAuthProxyCtlr" id="thepage">
+    
+<h1>Post Authorization Setup...</h1>
+<script>
+function authorizeSF() {
+	location.href = '{!JSENCODE(sfAuthUrl)}';
+}
+function sendToken() {
+	debugger;
+	document.getElementById('{!$Component.theform.thecode}').value = gup('code');
+	saveToken();
+}
+function gup(name) {
+    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+        results = regex.exec(location.search);
+    return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+}
+</script>
+<apex:form id="theform">
+	<apex:actionFunction name="saveToken" action="{!saveToken}" oncomplete="authorizeSF();" />
+	<apex:inputHidden value="{!code}" id="thecode" />
+</apex:form>
+<script>
+sendToken();
+</script>
+</apex:page>

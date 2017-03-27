@@ -1,0 +1,289 @@
+<apex:page showHeader="true" sidebar="false" docType="html-5.0" id="myPage" controller="wistia.SendVideoEmailCtlr" tabStyle="{!IF(strTabName<>null,strTabName,'lead')}" standardStylesheets="false">
+
+    <!--<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>-->
+    
+    <apex:form id="theForm">
+        <apex:actionFunction action="{!selectVideo}" name="selectVideo" reRender="hiddenfld" oncomplete="setValues();">
+            <apex:param name="imgurl" value=""/>
+            <apex:param Name="videourl" Value=""/>
+        </apex:actionFunction>
+        <apex:actionFunction name="next" action="{!next}" />
+        <apex:actionFunction name="changeTemplate" action="{!changeTemplate}" reRender="hiddenfld"/>
+        <apex:actionFunction name="dummy" action="{!dummy}" reRender="theSubPanel"/>
+        <apex:inputHidden value="{!sObj['Video_Email_Body__c']}" id="hiddenfld"/>
+        <apex:inputHidden value="{!selectedTemp}" id="hiddenTName"/>
+        
+        <html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <head>
+            <title>Send Video Email</title>
+            <apex:stylesheet value="{!URLFOR($Resource.wistia__SLDS090, 'assets/styles/salesforce-lightning-design-system-vf.css')}" />
+            <apex:includeScript value="{!URLFOR($Resource.wistia__customrtf, '/js/jquery.min.js')}"/>
+            <script>
+                var changed = false;
+                $(function() {
+                    var cke = $("textarea[id*='requestText']").attr("id");
+                    var editor = CKEDITOR.instances[cke];
+                    editor.on('change', function(e){
+                        if(changed == false)
+                            setVal();
+                    });
+                });
+                
+                //$(function(){
+                // Select the select that ends with the id of 'descOption'
+                // and listen to it changing...
+                //$("textarea[id*='requestText']").on("change keyup paste", function(){
+                function viewState() {
+                    startLoading();
+                    var cke_editor_instance = $("textarea[id*='requestText']").attr("id");
+                    var body = CKEDITOR.instances[cke_editor_instance].getData();
+                    
+                    setValueForInputHidden();
+                        
+                    if (body.indexOf('<span id="placeholder"') > -1){
+                       next();
+                    }
+                    else {
+                        next();
+                    }
+                    
+                }       
+                    //});
+                //});
+                
+                function showalert(val) {
+                    if(val == true){
+                      var div = document.getElementById('thealert');
+                      div.style.display = "block";
+                    }
+                    else{
+                      var div = document.getElementById('thealert');
+                      div.style.display = "none";
+                    }
+                  
+                }
+                
+                function alertOnEdit() {
+                    debugger;
+                    pageVars.templateName = null;
+                    var cke_editor_instance = $("textarea[id*='requestText']").attr("id");
+                    var body = CKEDITOR.instances[cke_editor_instance].getData();
+                    if (body.indexOf('<span') < 0){
+                        CKEDITOR.instances[cke_editor_instance]
+                            .setData($("[id$='hiddenfld']").val());
+                    } 
+                    if(changed == false) {
+                        showmodel(true);    
+                    }
+                    else {
+                        showalert(true);
+                    }        
+                }
+
+                function setVal() {
+                    changed = true;
+                    var cke_editor_instance = $("textarea[id*='requestText']").attr("id");
+                    var body = CKEDITOR.instances[cke_editor_instance].getData();
+                    if (body.indexOf('<span') < 0){
+                        CKEDITOR.instances[cke_editor_instance]
+                            .setData($("[id$='hiddenfld']").val());
+                    }
+                }
+                function setValueForInputHidden() {
+                    changed = true;
+                    var cke_editor_instance = $("textarea[id*='requestText']").attr("id");
+                    var body = CKEDITOR.instances[cke_editor_instance].getData();
+                    if (body.indexOf('<span') < 0){
+                        // CKEDITOR.instances[cke_editor_instance]
+                        //     .setData($("[id$='hiddenfld']").val());
+                        $("[id$='hiddenfld']").val(body);
+                    }
+                }
+
+                function setSubject(txt) {
+                    $("[id$='theSubject']").val(txt);
+                    dummy();    
+                }
+                function DoNav(url){
+                    document.location.href = url;
+                }
+                function startLoading(){
+                  //alert('>>>>In');
+                   $('#load_scrl').css('top', $(document).scrollTop() + 200);
+                   $('.loadingBox').show();
+                }
+                function endLoading(){
+                   //alert('>>>>In');
+                   $('.loadingBox').hide();
+                }
+                function changeTemplateCb(templateName) {
+                    debugger;
+                    location.href = '/apex/Wistia__SendVideoEmail?Id={!currentObjId}&tId=' + templateName;
+                }
+ 
+
+            </script>
+            <style>
+                #templateErrorPanel {
+                    height: 90px;
+                }
+                #bubblePanel {
+                    height: 0px;
+                }
+                #compGrid {
+                    display: block;
+                }
+            </style>
+        </head>
+        <apex:actionStatus onstart="startLoading();" onstop="endLoading();" id="loadStatus"/>
+        <body>
+            <div class="slds">
+                <div class="slds-page-header" role="banner"> 
+                    <div class="slds-grid">
+                        <div class="slds-col">  
+                            <div class="slds-media"> 
+                                <div class="slds-media__figure">
+                                    <svg aria-hidden="true" class="slds-icon slds-icon--large slds-icon-standard-user">
+                                        <use xlink:href="{!URLFOR($Resource.SLDS090, 'assets/icons/custom-sprite/svg/custom83.svg')}"></use>
+                                    </svg>
+                                </div>
+                                <div class="slds-media__body">
+                                    <h1 class="slds-text-heading--small">{!$Label.Send_video} {!sObj['Email']}</h1>
+                                    <h1 class="slds-text-heading--medium">
+                                        <apex:outputPanel id="theSubPanel">
+                                            <apex:outputText value="{!subject}" id="theSubject"/>
+                                        </apex:outputPanel>
+                                    </h1>
+                                </div>
+                                <div id="load_scrl" class="loadingBox loader" style="display:none"> 
+                                    <div class="slds-spinner--large">
+                                        <img src="{!URLFOR($Resource.SLDS090, '/assets/images/spinners/slds_spinner_brand.gif')}" alt="Loading..." />
+                                    </div>
+                               </div>
+                               <div class="loadingBox overlay"> </div>
+                               <div class="slds-col slds-no-flex slds-align-middle">  
+                               <div class="slds-button-group" role="group"></div>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                    <div class="slds-col slds-no-flex slds-align-middle">  
+                        <div class="slds-button-group" role="group">
+
+                        </div>
+                    </div>
+                </div> 
+                <div class="myapp">    
+                    <div class="slds-grid slds-m-top--large">        
+                        <div class="slds-col slds-col-rule--right slds-p-right--large slds-size--8-of-12">
+                        <div class="slds-card">        
+                            <header class="slds-card__header slds-grid">        
+                            <div class="slds-col slds-media slds-media--center"> 
+                               <!-- *****START BODY***** -->
+                                <div class="slds-media__body">
+                                    <table class="slds-table slds-max-medium-table--stacked-horizontal slds-no-row-hover">
+                                        <tr>
+                                            <td width="10%">&nbsp;</td>
+                                            <td align="right">
+                                                
+                                                <div class="slds-col slds-no-flex slds-p-left--large" align="right">
+                                                    <input type="button" value="Cancel" class="slds-button slds-button--neutral slds-button--small" onclick="location.href='/{!sObj['Id']}';" />
+                                                    <input type="button" value="Change Template" class="slds-button slds-button--neutral slds-button--small" onclick="alertOnEdit();" />
+                                                    <apex:commandButton value="Preview" styleclass="slds-button slds-button--neutral slds-button--small" onclick="viewState();" oncomplete="endLoading();" />
+                                                </div>
+                                               
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                {!$Label.Subject}:
+                                            </td>
+                                            <td>
+                                                <apex:inputText value="{!subject}" size="255" styleclass="slds-input" style="width:100%;" onblur="setSubject(this.value);" />
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                            <!-- *****END BODY***** -->
+                            </header>
+                            <div class="slds-card__body"  style="margin-left:2%;margin-right:2%;">
+                                <apex:outputPanel id="tabOne">
+                                <table class="slds-table slds-max-medium-table--stacked-horizontal slds-no-row-hover">
+                                    <tr>
+                                        <td style="border:none;">
+                                            {!$Label.Body}:
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border:none;">
+                                            <apex:inputfield value="{!sObj['Wistia__Video_Email_Body__c']}" id="requestText" />
+                                        </td>
+                                        
+                                    </tr>
+                                </table>
+                                </apex:outputPanel>
+                            </div>
+                            <footer class="slds-card__footer">
+                                <a href="#"></a>
+                            </footer>
+                        </div>      
+                        </div>
+                        <!-- COMPACT CARD -->
+                        <div class="slds-col slds-p-left--large slds-size--4-of-12">
+                            <div class="slds-card">
+                                <section class="slds-card" style="background-color:white">
+                                    <p align="center" style="background-color:white" ><b>Videos</b></p>
+                                    <div class="slds-media--timeline"  >
+                                        <table class="slds-table" >
+                                            <apex:repeat value="{!VideoImages}" var="vImages" >
+                                                    <tr onclick="selectVideo('{!JSENCODE(vImages.vImageUrlS)}','{!JSENCODE(vImages.videoUrls)}');">
+                                                        <td><apex:image style="width:95px;height:53px;min-width:59px;min-height:22px" id="theImage" 
+                                                         url="{!vImages.vImageUrlS}" value="{!vImages.vImageUrlS}" />
+                                                         </td>
+                                                         <td>{!vImages.vName}<br/>
+                                                            {!vImages.duration} &nbsp; &nbsp; &nbsp; Views: {!vImages.Views}
+                                                         </td>
+                                                    </tr>
+                                            </apex:repeat> 
+                                        </table>
+                                    </div>  
+                                </section>
+                            </div>
+                        </div>
+                         
+                    </div>
+                </div>
+                <c:ChangeTemplate />
+                <div id="thealert" style="display:none;">
+                    <div>
+                        <div aria-hidden="false" role="dialog" class="slds-modal slds-fade-in-open">
+                            <div class="slds-modal__container">
+                                <div class="slds-modal__header" align="center">
+                                    <h2 class="slds-text-heading--medium">Warning</h2>
+                                </div>
+                                <div class="slds-modal__content" align="center">
+                                    <div>
+                                        <p>{!$Label.This_will_lose_your_change}</p>
+                                    </div>
+                                </div>
+                                <div class="slds-modal__footer" align="center">
+                                    <input type="button" value="Cancel" class="slds-button slds-button--neutral slds-button--small" onclick="showalert(false);" />
+                          &nbsp;&nbsp;
+                                    <input type="button" value="Ok" class="slds-button slds-button--neutral slds-button--small" onclick="showmodel(true);" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slds-modal-backdrop slds-modal-backdrop--open"></div>
+                    </div>
+                </div>
+            </div>
+            <div id="oldbody" style="display:none;">{!sObj['Video_Email_Body__c']}</div>
+            <script>
+            // changeTemplate callback
+            pageVars.changeTemplateCallback = changeTemplateCb;
+            </script>
+        </body>
+        </html>
+    </apex:form>
+</apex:page>

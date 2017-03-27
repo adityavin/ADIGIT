@@ -1,0 +1,2 @@
+<apex:page standardController="Lead" action="{!dispatch}" extensions="wistia.SendVideoDispatcherCtlr">
+</apex:page>

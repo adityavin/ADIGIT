@@ -1,0 +1,81 @@
+<apex:page standardController="Contact" extensions="wistia.CustomEmailCtlr" standardStylesheets="false" showHeader="false" sidebar="false">
+  	<apex:stylesheet value="{!URLFOR($Resource.wistia__WistiaApp, 'WistiaApp/style.css')}"/>
+  	<style>
+  	.choose-video .thumbnailvideo {
+		background-color:#999;
+		width: 10%;
+		height: 10%;
+		float: left;
+		margin-right: 10%;
+	}
+
+  	</style>
+  	
+  	<apex:form id="theForm">
+  	<apex:actionFunction action="{!next}" name="redirect"/>
+	<apex:outputPanel id="thePanel">
+	  	<apex:outputPanel rendered="{!step == 1}">
+	  		<div class="wrapper choose-video" id="choose-template">
+			<div class="matte">
+				<h2>Choose a Template</h2>
+				<ul>
+					<li class="header">
+						<div class="preview">
+							Preview
+						</div>
+						<div class="subject-header">
+							Name
+						</div>
+					</li>
+					<li> 
+						<div class="thumbnail"><img></img></div>
+						<div class="subject"><span>Thank you for your Time</span><br/>Created 10:57AM 8/17/15</div>
+					</li>
+					<li>
+						<div class="thumbnail"><img></img></div>
+						<div class="subject"><span>Timed you for Thanks</span><br/>Created 1:09PM 8/17/15</div>
+					</li>
+					<li>
+						<div class="thumbnail"><img></img></div>
+						<div class="subject"><span>Just Watch This</span><br/>Created 5:24PM 8/17/15</div>
+					</li>
+					<div class="nav">
+						<button>Back</button>
+						<button type="button" onclick="redirect();">Continue</button> 
+					</div>
+				</ul>
+			</div>
+			</div>
+	  	</apex:outputPanel>
+	  	<apex:outputPanel rendered="{!step == 2}">
+	  		<div class="wrapper choose-video" id="choose-video">
+			<div class="matte">
+				<h2>Choose a Video</h2>
+				<ul>
+					<li>
+						<div class="thumbnailvideo"><img src="{!$Resource.thumbs}/thumbs/thumb1small.png"></img></div>
+						<div class="subject"><span>Wistia in 5 minutes</span><br/>5:40 / Created 6:55AM 8/17/15</div>
+						<div class="plays"><span>15</span><br/>Total Plays</div>
+					</li>
+					<li>
+						<div class="thumbnailvideo"><img src="{!$Resource.thumbs}/thumbs/thumb2small.png"></img></div>
+						<div class="subject"><span>Lenny Delivers Video</span><br/>1:40 / Created 6:55AM 8/17/15</div>
+						<div class="plays"><span>154</span><br/>Total Plays</div>				
+					</li>
+					<li>
+						<div class="thumbnailvideo"><img src="{!$Resource.thumbs}/thumbs/thumb3small.png"></img></div>
+						<div class="subject"><span>Video Delivers Lenny</span><br/>0:56 / Created 6:55AM 8/17/15</div>
+						<div class="plays"><span>1</span><br/>Total Plays</div>
+					</li>
+				</ul>
+					<div class="nav">
+						<button>Back</button>
+						<button type="button" onclick="redirect();">Compose Email</button> 
+					</div>
+			</div>
+		</div>
+	  	</apex:outputPanel>
+	  	
+	</apex:outputPanel>  	
+  	</apex:form>
+</apex:page>

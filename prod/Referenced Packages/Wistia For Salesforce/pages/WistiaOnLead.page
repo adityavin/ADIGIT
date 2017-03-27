@@ -1,0 +1,13 @@
+<apex:page showHeader="false" sidebar="false" standardController="Lead">
+	<!-- <c:WistiaVideoStats RecordId="{!Lead.Id}"/>-->
+	<c:WistiaVideoStats RecordId="{!Lead.Id}" />	
+	<apex:includeScript value="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"/>
+    <script>
+        var j$ = jQuery.noConflict();
+        j$("iframe").each(function(){
+            j$(this).load(function() {
+                j$(this).height( j$(this).contents().find("body").height() );
+            });
+        });
+    </script>
+</apex:page>

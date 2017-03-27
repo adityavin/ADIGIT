@@ -1,0 +1,5 @@
+{!Contact.FirstName} {!Contact.LastName}, 
+Thanks for working with us. We would appreciate it if you would take the time to fill out a quick survey regarding the service you received. 
+
+Survey Link:
+{!Public_Assessment__c.Public_Assessment_URL__c}
